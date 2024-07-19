@@ -1,0 +1,173 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 95%; /* Increase the width of the container */
+  max-width: 1400px; /* Set a max-width for better viewing on large screens */
+  height: 100vh;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.main-content {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 60px);
+}
+
+.left-section,
+.right-section {
+  flex: 1.5; /* Increased flex value to make them wider */
+  margin: 0 10px; /* Adjusted margin for spacing */
+}
+
+.middle-section {
+  flex: 3; /* Slightly reduced flex value to balance width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 10px; /* Adjusted margin for spacing */
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  resize: none;
+}
+
+.input-code-textarea {
+  height: 350px; /* Set the desired height for Input Code */
+  width: 100%; /* Set the width to fill the parent container */
+}
+
+.implementation-textarea {
+  height: 350px; /* Set the desired height for Implementation of Unit Test */
+  width: 100%; /* Set the width to fill the parent container */
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.analyse-btn {
+  background-color: #007bff;
+  color: white;
+  width: 100%;
+}
+
+.implement-btn {
+  background-color: #28a745;
+  color: white;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.test-cases-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  overflow-y: auto;
+}
+
+.test-case {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background: #f9f9f9;
+}
+
+.test-case-content {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.test-case-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.test-case p {
+  margin: 0 0 10px 0;
+}
+
+.regen-btn, .del-btn {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+}
+
+.regen-btn {
+  background-color: #ffc107;
+  color: white;
+}
+
+.del-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.unit-test-implementation {
+  margin-top: 20px;
+  width: 100%; /* Ensure this section takes the full width */
+}
