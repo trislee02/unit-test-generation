@@ -26,7 +26,7 @@ const App = () => {
   };
 
   return (
-    <div className="container">
+    <div className="app">
       <h1>Unit Test Generation</h1>
       <div className="main-content">
         <div className="left-section">
