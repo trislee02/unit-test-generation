@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
+import Modal from './components/Modal';
 
 const TestCase = ({ index, onRegenerate, onDelete }) => (
   <div className="test-case">
@@ -16,6 +17,30 @@ const TestCase = ({ index, onRegenerate, onDelete }) => (
 
 const App = () => {
   const [testCases, setTestCases] = useState([0, 1, 2, 3]);
+  const [showModal, setShowModal] = useState(false);
+  const unitTestRef = useRef(null);
+
+  const handleRegenClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleRegenerate = () => {
+    // Handle the regenerate logic here
+    setShowModal(false);
+  };
+
+  const handleCopyToClipboard = () => {
+    const textarea = unitTestRef.current;
+    if (textarea) {
+      textarea.select();
+      document.execCommand('copy');
+      alert('Copied to clipboard!');
+    }
+  };
 
   const addTestCase = () => {
     setTestCases([...testCases, testCases.length]);
@@ -26,7 +51,7 @@ const App = () => {
   };
 
   return (
-    <div className="app">
+    <div>
       <h1>Unit Test Generation</h1>
       <div className="main-content">
         <div className="left-section">
@@ -40,7 +65,7 @@ const App = () => {
           </div>
           <div className="form-group">
             <label>Input Code</label>
-            <textarea className="input-code-textarea"/>
+            <textarea className="input-code-textarea" cols="3000"/>
           </div>
           <button className="analyse-btn" onClick={addTestCase}>Analyse</button>
         </div>
@@ -50,20 +75,22 @@ const App = () => {
               <TestCase
                 key={index}
                 index={index}
-                onRegenerate={() => console.log('Regenerate', index)}
+                onRegenerate={handleRegenClick}
                 onDelete={() => removeTestCase(index)}
               />
             ))}
           </div>
+          <button className="implement-btn">Implement</button>
         </div>
         <div className="right-section">
           <div className="unit-test-implementation">
             <h2>Implementation of Unit Test</h2>
-            <textarea className="implementation-textarea"/>
+            <textarea ref={unitTestRef} className="implementation-textarea" cols="3000"/>
           </div>
-          <button className="implement-btn">Implement</button>
+          <button className="copy-btn" onClick={handleCopyToClipboard}>Copy to clipboard</button>
         </div>
       </div>
+      <Modal show={showModal} onClose={handleCloseModal} onRegenerate={handleRegenerate} />
     </div>
   );
 };
