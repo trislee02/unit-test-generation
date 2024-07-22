@@ -77,6 +77,12 @@ textarea {
   resize: none;
 }
 
+.docstring-textarea {
+  /* height: 400px; Set the desired height for Input Code */
+  width: 100%; /* Set the width to fill the parent container */
+  margin-bottom: 0; /* Remove the bottom margin */
+}
+
 .input-code-textarea {
   height: 400px; /* Set the desired height for Input Code */
   width: 100%; /* Set the width to fill the parent container */
@@ -123,9 +129,9 @@ button:disabled {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   overflow-y: auto; /* Ensure it has a vertical scroll bar */
-  max-height: calc(100vh - 170px); /* Prevent it from overflowing the screen */
+  max-height: calc(100vh - 420px); /* Prevent it from overflowing the screen */
 }
 
 .test-case {

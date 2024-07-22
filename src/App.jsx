@@ -17,6 +17,10 @@ const TestCase = ({ index, onRegenerate, onDelete }) => (
 
 const App = () => {
   const [testCases, setTestCases] = useState([0, 1, 2, 3]);
+  const [docstring, setDocstring] = useState('');
+  const [inputCode, setInputCode] = useState('');
+  const [focalMethodName, setFocalMethodName] = useState('');
+  const [numOfTest, setNumOfTest] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const unitTestRef = useRef(null);
 
@@ -42,7 +46,34 @@ const App = () => {
     }
   };
 
-  const addTestCase = () => {
+  const handleAnalyse = async () => {
+    const url = 'http://trile-pc.dtl:8000/generate-test-cases'; // Replace with your endpoint URL
+    const data = {
+      focal_module_name: "replace_with_your_module_name",
+      focal_method_name: focalMethodName,
+      code_snippet: inputCode,
+      num_tests: numOfTest
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST', // Specify the request method
+        headers: {
+          'Content-Type': 'application/json', // Specify the content type
+        },
+        body: JSON.stringify(data), // Convert the JavaScript object to a JSON string
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const content = await response.json(); // Parse the JSON response body
+      console.log(content); // Log the response content
+      return content; // Return the response content
+    } catch (error) {
+      console.error('Error:', error);
+    }
     setTestCases([...testCases, testCases.length]);
   };
 
@@ -57,19 +88,31 @@ const App = () => {
         <div className="left-section">
           <div className="form-group">
             <label>Focal Method Name</label>
-            <input type="text" />
+            <input type="text" value={focalMethodName} onChange={(event) => {setFocalMethodName(event.target.value)}}/>
           </div>
           <div className="form-group">
             <label>Number of test</label>
-            <input type="text" />
+            <input type="text" value={numOfTest} onChange={(event) => {setNumOfTest(event.target.value)}}/>
           </div>
           <div className="form-group">
             <label>Input Code</label>
-            <textarea className="input-code-textarea" cols="3000"/>
+            <textarea 
+              className="input-code-textarea" 
+              cols="3000"
+              value={inputCode} 
+              onChange={(event) => {setInputCode(event.target.value)}}/>
           </div>
-          <button className="analyse-btn" onClick={addTestCase}>Analyse</button>
+          <button className="analyse-btn" onClick={handleAnalyse}>Analyse</button>
         </div>
         <div className="middle-section">
+          <div className="form-group">
+            <label>Generated docstring</label>
+            <textarea 
+              className="docstring-textarea" 
+              rows="10" 
+              cols="3000"
+              value={docstring} />
+          </div>
           <div className="test-cases-section">
             {testCases.map((_, index) => (
               <TestCase
