@@ -47,7 +47,7 @@ const App = () => {
   };
 
   const handleAnalyse = async () => {
-    const url = 'http://trile-pc.dtl:8000/generate-test-cases'; // Replace with your endpoint URL
+    const url = 'url'; // Replace with your endpoint URL
     const data = {
       focal_module_name: "replace_with_your_module_name",
       focal_method_name: focalMethodName,
